@@ -1,0 +1,6 @@
+{
+  "name": "AI Style Transfer",
+  "description": "Upload a content image and a style image to create a new image that combines the content of the first with the style of the second. Adjust the style strength for different results.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}

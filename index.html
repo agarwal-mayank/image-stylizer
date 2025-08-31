@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Style Transfer</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="app-container">
+      <aside id="controls-panel">
+        <header class="app-header">
+          <div>
+            <h1>AI Style Transfer</h1>
+            <p>Redraw an image in the style of another.</p>
+          </div>
+          <button id="clear-all-btn" class="clear-all-btn" title="Clear All & Reset">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+        </header>
+
+        <div class="control-section">
+          <h2>1. Content Image</h2>
+          <div class="drop-zone" id="content-drop-zone">
+            <img class="image-preview" id="content-preview" alt="Content preview" />
+            <div class="placeholder">
+              <i class="fa-solid fa-image"></i>
+              <span>Click or drop image</span>
+            </div>
+            <input type="file" id="content-file-input" accept="image/*" class="file-input" />
+            <button class="clear-btn" id="clear-content-btn" title="Remove image">&times;</button>
+          </div>
+        </div>
+
+        <div class="control-section">
+          <h2>2. Style Image</h2>
+          <div class="drop-zone" id="style-drop-zone">
+            <img class="image-preview" id="style-preview" alt="Style preview" />
+            <div class="placeholder">
+              <i class="fa-solid fa-palette"></i>
+              <span>Click or drop image</span>
+            </div>
+            <input type="file" id="style-file-input" accept="image/*" class="file-input" />
+            <button class="clear-btn" id="clear-style-btn" title="Remove image">&times;</button>
+          </div>
+        </div>
+        
+        <div class="control-section">
+          <h2>3. Settings</h2>
+          <div class="select-container">
+            <label for="aspect-ratio-select">Aspect Ratio</label>
+            <select id="aspect-ratio-select">
+              <option value="1:1">Square (1:1)</option>
+              <option value="16:9">Widescreen (16:9)</option>
+              <option value="9:16" selected>Portrait (9:16)</option>
+            </select>
+          </div>
+           <div class="select-container">
+            <label for="enhancer-style-select">Enhancement Style</label>
+            <select id="enhancer-style-select">
+              <!-- Options will be injected by JS -->
+            </select>
+          </div>
+          <div class="slider-container">
+            <label for="strength-slider">Style Strength</label>
+            <input type="range" id="strength-slider" min="1" max="100" value="50" class="slider"/>
+            <span id="strength-value">50%</span>
+          </div>
+        </div>
+
+        <div class="control-section" id="color-section" style="display: none;">
+          <h2>4. Color Adjustment</h2>
+          <p class="section-description">Apply dominant colors from the style image.</p>
+          <div id="color-palette-display"></div>
+          <div class="slider-container">
+            <label for="color-intensity-slider">Color Intensity</label>
+            <input type="range" id="color-intensity-slider" min="0" max="100" value="50" class="slider"/>
+            <span id="color-intensity-value">50%</span>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button id="generate-btn" disabled>
+            <i class="fa-solid fa-bolt"></i>
+            Generate
+          </button>
+          <button id="apply-color-btn" disabled>
+            <i class="fa-solid fa-droplet"></i>
+            Apply Colors
+          </button>
+          <button id="upscale-btn" disabled>
+            <i class="fa-solid fa-arrows-up-down-left-right"></i>
+            Upscale
+          </button>
+          <button id="save-btn" disabled>
+            <i class="fa-solid fa-download"></i>
+            Save
+          </button>
+        </div>
+      </aside>
+
+      <main id="result-panel">
+        <div class="result-area" id="result-area">
+          <img class="image-preview" id="result-image" alt="Generated result" />
+          <div class="placeholder" id="result-placeholder">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Your result will appear here</span>
+          </div>
+          <div class="loader-overlay" id="loader">
+            <div class="spinner"></div>
+            <span id="loader-text">Generating...</span>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.run/@google/genai"
+        }
+      }
+    </script>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
